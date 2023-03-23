@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   CarouselButton,
@@ -11,24 +11,20 @@ import {
   CarouselItemTitle,
   CarouselMobileScrollNode,
   GothicLink,
-} from './TimeLineStyles';
+} from "./TimeLineStyles";
 import {
   Section,
   SectionDivider,
   SectionText,
   SectionTitle,
-} from '../../styles/GlobalComponents';
-import { TimeLineData } from '../../constants/constants';
+} from "../../styles/GlobalComponents";
+// import { TimeLineData } from "../../constants/constants";
 
-const TOTAL_CAROUSEL_COUNT = TimeLineData.length;
+// const TOTAL_CAROUSEL_COUNT = TimeLineData.length;
 
 const Timeline = () => {
   const [activeItem, setActiveItem] = useState(0);
   const carouselRef = useRef();
-
-  const scroll = (node, left) => {
-    return node.scrollTo({ left, behavior: 'smooth' });
-  };
 
   const handleClick = (e, i) => {
     e.preventDefault();
@@ -42,18 +38,6 @@ const Timeline = () => {
     }
   };
 
-  const handleScroll = () => {
-    if (carouselRef.current) {
-      const index = Math.round(
-        (carouselRef.current.scrollLeft /
-          (carouselRef.current.scrollWidth * 0.7)) *
-          TimeLineData.length
-      );
-
-      setActiveItem(index);
-    }
-  };
-
   // snap back to beginning of scroll when window is resized
   // avoids a bug where content is covered up if coming from smaller screen
   useEffect(() => {
@@ -61,69 +45,71 @@ const Timeline = () => {
       scroll(carouselRef.current, 0);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
   }, []);
 
   return (
-    <Section id='about'>
-      <SectionTitle>O mnie</SectionTitle>
+    <Section id="about">
+      <SectionTitle>About</SectionTitle>
       <SectionText>
         <br />
-        Maciej&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grochowski&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;22 lata
+        Tanner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;North
+        Florida&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <br />
         <br />
-        Front-End Software Developer oraz Mobile Engineer (11 miesięcy komercyjnego doświadczenia)
+        I enjoy coding in javascript libraries and frameworks but am comfortable
+        coding in most languages. I also enjoy building with IaaC tools (like
+        AWS CDK).
+        <br />
+        <br />I currently am working on{" "}
+        <GothicLink href="https://pushenhance.com/" target="_blank">
+          www.pushenhance.com
+        </GothicLink>
+        . It is a push notifications SaaS that uses Chat-GPT to create
+        notification text and scheduling.
         <br />
         <br />
-        Zaczynałem od języka C/C++, potem języki JavaScript, Python, C#, Java.
-        Obecnie programuję głównie w technologiach Angular/React/Ionic.
-        <br />
-        <br />
-        Pochodzę z Żywca i obecnie tam mieszkam, ale mogę dojeżdżać do biura w Krakowie.
-        <br />
-        <br />
-        Mogę pracować hybrydowo oraz zdalnie zarówno na pełny jak
-        i niepełny etat.
+        When I'm not working, I'm usually coding personal projects, taking care
+        of my family and animals (we've got goats, chickens, ducks, and
+        rabbits), or playing games with friends online.
         <br />
         <br />
       </SectionText>
       <SectionDivider />
       <SectionTitle>
         <br />
-        Co jeszcze?
+        Work Experience
       </SectionTitle>
       <SectionText>
-        <br />- Współtwórca i główny betatester modyfikacji gry "Gothic 2:
-        Ucieczka" (podgląd{' '}
-        <GothicLink href='https://g2ucieczka.pl' target='_blank'>
-          tutaj
+        <GothicLink
+          style={{ color: "white", fontWeight: "bold" }}
+          href="https://lime-willetta-93.tiiny.site/"
+          target="_blank"
+        >
+          Resume
         </GothicLink>
-        ) (2014-2019)
+      </SectionText>
+      <SectionText>
+        - Working as a Cloud App Developer at{" "}
+        <GothicLink href="https://aws.amazon.com/" target="_blank">
+          AWS
+        </GothicLink>{" "}
+        (2023)
         <br />
-        <br />- Praca jako wolontariusz w stowarzyszeniu:{' '}
-        <GothicLink href='https://www.polaris.org.pl' target='_blank'>
-          POLARIS - OPP
-        </GothicLink>{' '}
-        (2019)
+        <br />- Worked as a Full-Stack Developer at{" "}
+        <GothicLink href="https://www.glidian.com" target="_blank">
+          Glidian
+        </GothicLink>{" "}
+        (2022)
         <br />
-        <br />- Twórca filmów w jakości 4K (2160p) (podgląd{' '}
-        <GothicLink href='https://www.youtube.com/@MacieyTM' target='_blank'>
-          tutaj
-        </GothicLink>
-        ) (2014-2021)
-        <br />
-        <br />
-        - Prawo jazdy: kat. B<br />
-        <br />
-        - Język angielski: poz. C1
-        <br />
-        <br />
-        -
-        Zainteresowania:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Informatyka&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;E-sport&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Kolarstwo
-        <br />
+        <br />- Worked as a Software Engineer at{" "}
+        <GothicLink href="https://www.availity.com" target="_blank">
+          Availity
+        </GothicLink>{" "}
+        (2020-2022)
         <br />
       </SectionText>
-      <CarouselContainer ref={carouselRef} onScroll={handleScroll}>
+      {/* <CarouselContainer ref={carouselRef} onScroll={handleScroll}>
         <>
           {TimeLineData.map((item, index) => (
             <CarouselMobileScrollNode
@@ -139,33 +125,33 @@ const Timeline = () => {
                 <CarouselItemTitle>
                   {`${item.year}`}
                   <CarouselItemImg
-                    width='208'
-                    height='6'
-                    viewBox='0 0 208 6'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
+                    width="208"
+                    height="6"
+                    viewBox="0 0 208 6"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fillRule='evenodd'
-                      clipRule='evenodd'
-                      d='M2.5 5.5C3.88071 5.5 5 4.38071 5 3V3.5L208 3.50002V2.50002L5 2.5V3C5 1.61929 3.88071 0.5 2.5 0.5C1.11929 0.5 0 1.61929 0 3C0 4.38071 1.11929 5.5 2.5 5.5Z'
-                      fill='url(#paint0_linear)'
-                      fillOpacity='0.33'
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M2.5 5.5C3.88071 5.5 5 4.38071 5 3V3.5L208 3.50002V2.50002L5 2.5V3C5 1.61929 3.88071 0.5 2.5 0.5C1.11929 0.5 0 1.61929 0 3C0 4.38071 1.11929 5.5 2.5 5.5Z"
+                      fill="url(#paint0_linear)"
+                      fillOpacity="0.33"
                     />
                     <defs>
                       <linearGradient
-                        id='paint0_linear'
-                        x1='-4.30412e-10'
-                        y1='0.5'
-                        x2='208'
-                        y2='0.500295'
-                        gradientUnits='userSpaceOnUse'
+                        id="paint0_linear"
+                        x1="-4.30412e-10"
+                        y1="0.5"
+                        x2="208"
+                        y2="0.500295"
+                        gradientUnits="userSpaceOnUse"
                       >
-                        <stop stopColor='white' />
+                        <stop stopColor="white" />
                         <stop
-                          offset='0.79478'
-                          stopColor='white'
-                          stopOpacity='0'
+                          offset="0.79478"
+                          stopColor="white"
+                          stopOpacity="0"
                         />
                       </linearGradient>
                     </defs>
@@ -185,14 +171,13 @@ const Timeline = () => {
               index={index}
               active={activeItem}
               onClick={(e) => handleClick(e, index)}
-              type='button'
+              type="button"
             >
               <CarouselButtonDot active={activeItem} />
             </CarouselButton>
           );
         })}
-      </CarouselButtons>
-      <SectionDivider />
+      </CarouselButtons> */}
     </Section>
   );
 };

@@ -1,22 +1,33 @@
-import React from 'react';
+import React from "react";
+import { GrDocumentPdf } from "react-icons/gr";
+import { IconContext } from "react-icons";
 
-import { Section, SectionText, SectionTitle } from '../../styles/GlobalComponents';
-import Button from '../../styles/GlobalComponents/Button';
-import { LeftSection } from './HeroStyles';
+import {
+  Section,
+  SectionText,
+  SectionTitle,
+} from "../../styles/GlobalComponents";
+import Button from "../../styles/GlobalComponents/Button";
+import { LeftSection } from "./HeroStyles";
 
-const Hero = (props) => (
+const Hero = ({ handleClick }) => (
   <>
     <Section row nopadding>
       <LeftSection>
         <SectionTitle main center>
-          Witaj na mojej<br />
-          stronie portfolio!
+          Hi, I'm Tanner
         </SectionTitle>
         <SectionText>
-        Maciej Grochowski | Front-End Developer oraz Mobile Engineer w technologii Angular/React/Ionic
+          I'm a Full-Stack Developer w/ a focus in React, Node, and AWS Cloud.
+          <br />
         </SectionText>
-        <a href="https://macieytm.github.io/About-Me" target="_blank">
-        <Button onClick={props.handleClick}>Moja wizytówka</Button></a>
+        <a
+          target="_blank"
+          href="mailto:programtanner@gmail.com?subject=Saw your portfolio website and would like to speak with you!"
+        >
+          <Button onClick={handleClick}>Contact me</Button>
+        </a>
+        <br />
       </LeftSection>
     </Section>
   </>
